@@ -1,0 +1,27 @@
+{
+  "name": "needledrop",
+  "version": "1.0.0",
+  "description": "A spinning-vinyl companion window with animated, word-by-word synced lyrics for Apple Music on Windows 11",
+  "main": "main.js",
+  "keywords": ["apple-music", "lyrics", "vinyl", "windows", "electron", "karaoke"],
+  "author": "Nadav",
+  "license": "MIT",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "test": "node --test test/lyrics.test.js",
+    "icon": "electron tools/make-icon.js",
+    "pack": "electron-packager . \"Needledrop\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=build/icon.ico --asar.unpack=\"*.ps1\" --app-copyright=\"MIT\" --ignore=\"^/(test|tools|docs|dist|installer|graphify-out|\\.impeccable)($|/)\"",
+    "zip": "powershell -NoProfile -Command \"Compress-Archive -Path 'dist/Needledrop-win32-x64','installer/*','README.md','LICENSE' -DestinationPath 'dist/Needledrop-win-x64.zip' -Force\"",
+    "dist": "npm test && npm run pack && npm run zip"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.3.0",
+    "electron": "^45.4.1"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  }
+}
