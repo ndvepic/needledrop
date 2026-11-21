@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Needledrop — Synced lyrics and a spinning vinyl for Apple Music on Windows</title>
+<meta name="description" content="Needledrop is a companion window for Apple Music on Windows: a spinning vinyl, word-by-word synced lyrics and a live design panel. No account, no tracking.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="Needledrop — Apple Music, on a living turntable">
+<meta property="og:description" content="A spinning vinyl and word-by-word synced lyrics for Apple Music on Windows.">
+<meta property="og:image" content="assets/hero.webp">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Needledrop">
+      <img src="assets/icon.svg" width="30" height="30" alt="">
+      <span>Needledrop</span>
+    </a>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+      <a href="#requirements" data-i18n="nav.req">Requirements</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang" id="lang" type="button" aria-label="Switch language">עברית</button>
+      <a class="btn btn-primary btn-sm" href="#download" data-i18n="nav.download">Download</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navlinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 data-i18n="hero.title">Your music, on a living turntable.</h1>
+      <p class="lead" data-i18n="hero.lead">Needledrop turns the song that is playing into a spinning vinyl with lyrics that light up word by word. It runs beside the Apple Music app: no account, no login, nothing injected.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#download" data-i18n="hero.cta1">Download for Windows</a>
+        <a class="btn btn-ghost" href="#how" data-i18n="hero.cta2">See how it works</a>
+      </div>
+      <ul class="meta" aria-label="Key facts">
+        <li data-i18n="hero.m1">Free and open source (MIT)</li>
+        <li data-i18n="hero.m2">Windows 10 and 11</li>
+        <li data-i18n="hero.m3">No account required</li>
+      </ul>
+    </div>
+    <figure class="shot hero-shot">
+      <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Needledrop</span></div>
+        <img src="assets/hero.webp" width="1600" height="900" alt="Needledrop showing a spinning vinyl with the current lyric line highlighted word by word">
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- FACTS BAR -->
+<section class="facts" aria-label="At a glance">
+  <div class="wrap facts-grid">
+    <div><strong>0</strong><span data-i18n="facts.a">accounts or logins</span></div>
+    <div><strong>5</strong><span data-i18n="facts.b">singing effects</span></div>
+    <div><strong>8</strong><span data-i18n="facts.c">ready-made design presets</span></div>
+    <div><strong>RTL</strong><span data-i18n="facts.d">full Hebrew and right-to-left support</span></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="feat.title">Everything Apple Music for Windows is missing.</h2>
+      <p class="sub" data-i18n="feat.sub">Apple Music for Windows has no visualiser and no immersive lyrics view. Needledrop adds both, as a separate window that follows the real app.</p>
+    </header>
+
+    <div class="cards">
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>
+        <h3 data-i18n="c1.t">Real vinyl</h3>
+        <p data-i18n="c1.d">The album cover becomes the record label, or the whole disc in picture-disc mode. Eased spin-up, a tonearm that tracks the song, and 3D tilt that follows your mouse.</p>
+      </article>
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h13"/></svg>
+        <h3 data-i18n="c2.t">Word-by-word lyrics</h3>
+        <p data-i18n="c2.d">Synced lyrics from LRCLIB with true per-word timing when available. Five singing effects, five entrances and three layouts: scroll, focus and poster.</p>
+      </article>
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        <h3 data-i18n="c3.t">Live design panel</h3>
+        <p data-i18n="c3.d">Fonts, size, colours from the cover or your own, glow, background, vinyl and layout. Save presets and share a look as a short code. Every change is instant.</p>
+      </article>
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-4M8 18V6M12 15V9M16 20V4M20 14v-4"/></svg>
+        <h3 data-i18n="c4.t">Reacts to the music</h3>
+        <p data-i18n="c4.d">Background and record pulse with the bass, with an optional equaliser. Audio is analysed in memory in the window and never recorded or sent anywhere.</p>
+      </article>
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <h3 data-i18n="c5.t">Widget and screensaver</h3>
+        <p data-i18n="c5.d">Shrink to a small always-on-top card with the current line, or let the screensaver take over after idle time: a big clock, the drifting cover and poster-size lyrics.</p>
+      </article>
+      <article class="card">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 11h.01M11 11h.01M15 11h.01M7 14h10"/></svg>
+        <h3 data-i18n="c6.t">Controls and hotkeys</h3>
+        <p data-i18n="c6.d">Previous, play-pause and next from the window or keyboard, tray menu, launch at startup, and a global hotkey (Ctrl+Alt+L) to show or hide it from any app.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section alt" id="showcase">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="show.title">One window, many looks.</h2>
+    </header>
+    <div class="tabs" role="tablist" aria-label="Product views">
+      <button role="tab" aria-selected="true"  data-tab="0" data-i18n="tab.0">Immersive</button>
+      <button role="tab" aria-selected="false" data-tab="1" data-i18n="tab.1">Poster</button>
+      <button role="tab" aria-selected="false" data-tab="2" data-i18n="tab.2">Design panel</button>
+      <button role="tab" aria-selected="false" data-tab="3" data-i18n="tab.3">Screensaver</button>
+      <button role="tab" aria-selected="false" data-tab="4" data-i18n="tab.4">Hebrew and RTL</button>
+      <button role="tab" aria-selected="false" data-tab="5" data-i18n="tab.5">Widget</button>
+    </div>
+    <div class="stage" id="stage" aria-live="polite">
+      <figure class="shot">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span id="stagebar">Needledrop</span></div>
+          <img id="stageimg" src="assets/hero.webp" width="1600" height="900" alt="">
+        </div>
+        <figcaption id="stagecap"></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="how.title">Built next to Apple Music, not inside it.</h2>
+      <p class="sub" data-i18n="how.sub">Apple Music for Windows is a closed Store app, so nothing can be injected into it. Needledrop reads what the app already publishes to Windows.</p>
+    </header>
+    <ol class="steps">
+      <li>
+        <span class="num">1</span>
+        <h3 data-i18n="s1.t">Apple Music plays</h3>
+        <p data-i18n="s1.d">The app publishes title, artist, cover and position to the Windows media session, the same one that powers the system volume flyout.</p>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <h3 data-i18n="s2.t">Needledrop listens</h3>
+        <p data-i18n="s2.d">It samples that session about 2.5 times a second and time-stamps every sample, so lyrics, vinyl and tonearm run from one clock and never drift apart.</p>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <h3 data-i18n="s3.t">Lyrics find their place</h3>
+        <p data-i18n="s3.d">Lyrics are looked up on LRCLIB, cached locally and matched to the song. Per-word timing is used where it exists and estimated otherwise.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="section dark" id="privacy">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="priv.title">Minimal by design.</h2>
+      <p class="sub" data-i18n="priv.sub">To find lyrics, Needledrop sends the song title, artist, album and duration to lrclib.net. Nothing else leaves your computer.</p>
+    </header>
+    <div class="cards cards-4">
+      <article class="card">
+        <h3 data-i18n="p1.t">No accounts</h3>
+        <p data-i18n="p1.d">No sign-up, no login, no analytics and no tracking of any kind.</p>
+      </article>
+      <article class="card">
+        <h3 data-i18n="p2.t">Audio stays local</h3>
+        <p data-i18n="p2.d">Audio is analysed in memory for the bass reaction and then discarded. Nothing is recorded or played back.</p>
+      </article>
+      <article class="card">
+        <h3 data-i18n="p3.t">Your data, your profile</h3>
+        <p data-i18n="p3.d">Settings and the lyrics cache live in your user profile and are kept when you uninstall.</p>
+      </article>
+      <article class="card">
+        <h3 data-i18n="p4.t">Open source</h3>
+        <p data-i18n="p4.d">MIT licensed. The lyrics logic is unit-tested, and you can read every line that runs.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section class="section" id="requirements">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="req.title">Clear about what it needs, and what it cannot do.</h2>
+    </header>
+    <div class="two">
+      <div class="panel">
+        <h3 data-i18n="req.h1">System requirements</h3>
+        <dl class="spec">
+          <div><dt data-i18n="r.os">Operating system</dt><dd data-i18n="r.os.v">Windows 11 (Windows 10 also works)</dd></div>
+          <div><dt data-i18n="r.app">Music app</dt><dd data-i18n="r.app.v">Apple Music from the Microsoft Store</dd></div>
+          <div><dt data-i18n="r.dl">Download</dt><dd data-i18n="r.dl.v">About 150 MB, no Node.js needed</dd></div>
+          <div><dt data-i18n="r.rights">Rights</dt><dd data-i18n="r.rights.v">No administrator rights needed</dd></div>
+        </dl>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="req.h2">Honest limitations</h3>
+        <ul class="ticks">
+          <li data-i18n="l1">Seeking is not possible: Apple Music for Windows does not let other apps seek, so clicking a lyric line cannot jump in the song. Play, pause, next and previous work.</li>
+          <li data-i18n="l2">Lyrics come from LRCLIB, a community source, not from Apple. Rare songs may have none, and timing can be adjusted per song.</li>
+          <li data-i18n="l3">Only Apple Music is followed by default.</li>
+          <li data-i18n="l4">Audio reactivity uses Windows output loopback, so Windows may briefly show a capture indicator.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEYBOARD -->
+<section class="section alt" id="keys">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-i18n="key.title">Everything is one key away.</h2>
+    </header>
+    <div class="keys">
+      <div><kbd>S</kbd><span data-i18n="k.s">Design panel</span></div>
+      <div><kbd>R</kbd><span data-i18n="k.r">Random design</span></div>
+      <div><kbd>W</kbd><span data-i18n="k.w">Widget mode</span></div>
+      <div><kbd>F</kbd><span data-i18n="k.f">Fullscreen</span></div>
+      <div><kbd>V</kbd><span data-i18n="k.v">Vinyl or picture disc</span></div>
+      <div><kbd>P</kbd><span data-i18n="k.p">Always on top</span></div>
+      <div><kbd>Space</kbd><span data-i18n="k.sp">Play or pause</span></div>
+      <div><kbd>[</kbd><kbd>]</kbd><span data-i18n="k.sync">Shift lyric sync</span></div>
+      <div class="wide"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>L</kbd><span data-i18n="k.g">Show or hide from any app</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="section" id="download">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2 data-i18n="dl.title">Download Needledrop for Windows</h2>
+        <p class="sub" data-i18n="dl.sub">Free and open source. Unzip, double-click Install.cmd, then play something in Apple Music.</p>
+        <div class="cta-row">
+          <a class="btn btn-light" id="dlbtn" href="https://github.com/ndvepic/needledrop/releases/latest" data-i18n="dl.btn">Download v1.0.0 (.zip)</a>
+          <a class="btn btn-outline" href="https://github.com/ndvepic/needledrop" data-i18n="dl.src">View source</a>
+        </div>
+      </div>
+      <ol class="install">
+        <li data-i18n="i1">Unzip the download.</li>
+        <li data-i18n="i2">Double-click Install.cmd. It installs for the current user, adds Start Menu and Desktop shortcuts and registers the app in Settings, Apps.</li>
+        <li data-i18n="i3">Play a song in Apple Music. Needledrop picks it up on its own.</li>
+        <li class="note" data-i18n="i4">The build is not code-signed, so Windows SmartScreen may show an “unknown publisher” notice the first time. Choose More info, then Run anyway.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap narrow">
+    <header class="sec-head">
+      <h2 data-i18n="faq.title">Frequently asked questions</h2>
+    </header>
+    <details><summary data-i18n="q1">Is Needledrop made by or affiliated with Apple?</summary><p data-i18n="a1">No. Needledrop is an independent project and is not affiliated with, endorsed by or sponsored by Apple Inc. “Apple Music” is a trademark of Apple Inc., used only to say which app Needledrop works with.</p></details>
+    <details><summary data-i18n="q2">Does it need an account or a subscription of its own?</summary><p data-i18n="a2">No. It is free, has no accounts and works with whatever you are already playing in Apple Music.</p></details>
+    <details><summary data-i18n="q3">Does it work offline?</summary><p data-i18n="a3">The app itself runs locally. Looking up lyrics needs an internet connection the first time; found lyrics are cached on your computer.</p></details>
+    <details><summary data-i18n="q4">Can I try it without Apple Music?</summary><p data-i18n="a4">Yes. Run the demo mode from source (npm run demo) for a built-in fake song, three demo tracks and word-timed lyrics.</p></details>
+    <details><summary data-i18n="q5">The lyrics are slightly early or late. What can I do?</summary><p data-i18n="a5">Shift the sync for that song with the [ and ] keys (hold Shift for whole seconds), or use the sync slider. You can also drop an .lrc or .txt file on the window to set a song’s lyrics.</p></details>
+    <details><summary data-i18n="q6">How do I uninstall it?</summary><p data-i18n="a6">Use Settings, Apps like any other program. Your settings and lyrics cache are kept unless you delete them.</p></details>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top"><img src="assets/icon.svg" width="28" height="28" alt=""><span>Needledrop</span></a>
+      <nav aria-label="Footer">
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="https://github.com/ndvepic/needledrop">GitHub</a>
+      </nav>
+    </div>
+    <p class="legal" data-i18n="legal">Needledrop is an independent project. It is not affiliated with, endorsed by or sponsored by Apple Inc. “Apple Music” is a trademark of Apple Inc., used here only to say which app Needledrop works with.</p>
+    <p class="legal">© 2026 Needledrop · <span data-i18n="mit">Released under the MIT License.</span></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

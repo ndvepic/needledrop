@@ -13,7 +13,7 @@
     "demo": "electron . --demo",
     "test": "node --test test/lyrics.test.js",
     "icon": "electron tools/make-icon.js",
-    "pack": "electron-packager . \"Needledrop\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=build/icon.ico --asar.unpack=\"*.ps1\" --app-copyright=\"MIT\" --ignore=\"^/(test|tools|docs|dist|installer|graphify-out|\\.impeccable)($|/)\"",
+    "pack": "electron-packager . \"Needledrop\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=build/icon.ico --asar.unpack=\"*.ps1\" --app-copyright=\"MIT\" --ignore=\"^/(test|tools|docs|site|dist|installer|graphify-out|\\.impeccable)($|/)\"",
     "zip": "powershell -NoProfile -Command \"Compress-Archive -Path 'dist/Needledrop-win32-x64','installer/*','README.md','LICENSE' -DestinationPath 'dist/Needledrop-win-x64.zip' -Force\"",
     "dist": "npm test && npm run pack && npm run zip"
   },
