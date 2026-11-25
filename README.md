@@ -134,9 +134,6 @@ renderer/            UI: app.js (engine), settings.js (live design panel), style
 test/                unit tests            build/   icon            tools/   icon generator
 site/                the marketing website (static, bilingual)
 ```
-
-**Spotify edition:** a separate copy lives in [needledrop-spotify](https://github.com/ndvepic/needledrop-spotify). It has not yet been verified against a live Spotify session.
-
 ---
 
 <a id="עברית"></a>
