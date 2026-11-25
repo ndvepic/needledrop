@@ -205,12 +205,16 @@ details p { padding: 0 0 24px; color: var(--ink-2); max-width: 68ch; }
   .nav-links { position: absolute; inset-inline: 0; top: 68px; flex-direction: column; gap: 0; margin: 0; background: #fff; border-bottom: 1px solid var(--line); padding: 8px var(--gutter) 16px; display: none; box-shadow: var(--shadow); }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .nav-actions .btn { display: none; }
   .cards, .cards-4, .steps { grid-template-columns: 1fr; }
   .steps li:last-child { grid-column: auto; }
   .keys .wide { grid-column: span 2; }
   .keys > div { flex-wrap: wrap; }
   .btn { width: 100%; }
+  .nav-actions .btn { width: auto; }
+  .nav-in { gap: 10px; }
+  .nav-in .brand { flex: none; font-size: 1.05rem; gap: 8px; }
+  .nav-actions { gap: 8px; }
+  .nav-actions .btn-sm { padding: .5rem .75rem; font-size: .9rem; }
   .cta-row { flex-direction: column; }
   .tabs { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scrollbar-width: none; }
   .tabs button { white-space: nowrap; }

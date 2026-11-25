@@ -1,19 +1,21 @@
-/* Needledrop site: product tour tabs, live lyric demo, mobile menu, reveal on scroll. English only. */
+/* Needledrop site: product tour tabs, word-fill illustration, mobile menu, reveal on scroll. English only. */
 (function () {
   'use strict';
 
-  // The release page the download buttons point to. Change this if the zip is hosted elsewhere.
-  var DOWNLOAD_URL = 'https://github.com/ndvepic/needledrop/releases/latest';
+  // The file the download button points to (always the newest release). Change this if the zip is hosted elsewhere.
+  var DOWNLOAD_URL = 'https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Product tour ---------- */
   var TABS = [
-    { img: 'hero', bar: 'Needledrop', alt: 'Needledrop with a spinning vinyl and highlighted lyrics', cap: 'The classic layout: the record on the left, the current line lighting up word by word on the right.' },
-    { img: 'poster', bar: 'Needledrop: Poster layout', alt: 'Poster layout with huge lyric type', cap: 'Poster layout: one line at a time in huge type, filling in as it is sung.' },
-    { img: 'panel', bar: 'Needledrop: Design panel', alt: 'The live design panel open next to the vinyl', cap: 'The live design panel (press S): fonts, colours, effects, background and presets, applied instantly.' },
-    { img: 'screensaver', bar: 'Needledrop: Screensaver', alt: 'The screensaver with a large clock', cap: 'After a few idle minutes: a big clock, the slowly drifting cover and the current line.' },
-    { img: 'hebrew-gisha', bar: 'Needledrop: Hebrew and right-to-left', alt: 'Hebrew lyrics set right to left', cap: 'Full right-to-left support with Hebrew fonts, in the same window as English lyrics.' },
-    { img: 'widget', bar: 'Needledrop: Widget', alt: 'Small widget card with the current lyric line', cap: 'Widget mode (press W): a small always-on-top card with the current line.', widget: true }
+    { img: 'classic', bar: 'Needledrop', alt: 'The classic layout with the album cover on a spinning record', cap: 'The classic layout: the record on the left, the lyrics lighting up word by word on the right.' },
+    { img: 'cover-colours', bar: 'Needledrop: Another song', alt: 'The same layout with a different album cover and different background colours', cap: 'A different song: the background and the progress bar take their colours from the new cover.' },
+    { img: 'neon', bar: 'Needledrop: Neon preset', alt: 'The neon preset with a teal and magenta background', cap: 'The Neon preset: its own colours, glow and lettering, applied in one click.' },
+    { img: 'picture', bar: 'Needledrop: Picture disc', alt: 'The album cover covering the whole record, placed on the right', cap: 'Picture-disc mode: the cover fills the whole record. The record can sit on either side.' },
+    { img: 'poster', bar: 'Needledrop: Poster layout', alt: 'Poster layout with one huge line across the window', cap: 'Poster layout: one line at a time in huge type.' },
+    { img: 'panel', bar: 'Needledrop: Design panel', alt: 'The live design panel open next to the record', cap: 'The live design panel (press S): presets, fonts, colours, effects and background, applied instantly.' },
+    { img: 'screensaver', bar: 'Needledrop: Screensaver', alt: 'The screensaver with a large clock over the album cover', cap: 'After a few idle minutes: a big clock, the slowly drifting cover and the current line.' },
+    { img: 'widget', bar: 'Needledrop: Widget', alt: 'The small widget card with the record and song title', cap: 'Widget mode (press W): a small always-on-top card with the record, the song and the current line.', widget: true }
   ];
   var tab = 0;
   var stage = document.getElementById('stage');
@@ -57,7 +59,7 @@
   var line = document.getElementById('demoLine');
   var bar = document.getElementById('demoBar');
   if (line && bar) {
-    var LINES = ['Neon lights are bleeding through the rain', 'I can hear the record spinning round again', 'Take me back to where we were before'];
+    var LINES = ['Every word lights up as it is sung', 'The album cover becomes the record label', 'Press S and make it look like yours'];
     var li = 0, wi = 0, timer = null, started = false;
 
     var show = function (text) {

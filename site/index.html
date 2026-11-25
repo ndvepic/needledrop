@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Needledrop | Synced Lyrics for Apple Music on Windows</title>
-<meta name="description" content="Needledrop adds a spinning vinyl and word-by-word synced lyrics to Apple Music on Windows 10 and 11. Free, open source, no account and no tracking.">
+<meta name="description" content="Needledrop adds a spinning vinyl and word-by-word synced lyrics to Apple Music on Windows 11. Free, open source, no account and no tracking.">
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://needledrop-music.netlify.app/">
 <meta property="og:title" content="Needledrop | Synced Lyrics for Apple Music on Windows">
 <meta property="og:description" content="A spinning vinyl and word-by-word synced lyrics for Apple Music on Windows.">
-<meta property="og:image" content="https://needledrop-music.netlify.app/assets/og.jpg">
+<meta property="og:image" content="https://needledrop-music.netlify.app/assets/og.jpg?v=2">
 <meta property="og:url" content="https://needledrop-music.netlify.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Needledrop","applicationCategory":"MultimediaApplication","operatingSystem":"Windows 10, Windows 11","description":"A companion window for Apple Music on Windows with a spinning vinyl and word-by-word synced lyrics.","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Needledrop","applicationCategory":"MultimediaApplication","operatingSystem":"Windows 11","description":"A companion window for Apple Music on Windows with a spinning vinyl and word-by-word synced lyrics.","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -54,14 +54,15 @@
       </div>
       <ul class="meta" aria-label="Key facts">
         <li>Free and open source (MIT)</li>
-        <li>Windows 10 and 11</li>
+        <li>Windows 11</li>
         <li>No account required</li>
       </ul>
     </div>
     <figure class="shot hero-shot">
       <div class="frame"><div class="bar"><i></i><i></i><i></i><span>Needledrop</span></div>
-        <img src="assets/hero.webp" width="1600" height="900" fetchpriority="high" decoding="async" alt="Needledrop showing a spinning vinyl with the current lyric line highlighted word by word">
+        <img src="assets/classic.webp" width="1600" height="900" fetchpriority="high" decoding="async" alt="Needledrop playing a song from Apple Music: the album cover on a spinning record, with the lyrics beside it (blurred in this screenshot)">
       </div>
+      <figcaption>A real screenshot. Lyrics are blurred on this site.</figcaption>
     </figure>
   </div>
 </section>
@@ -91,10 +92,10 @@
         <p>Synced lyrics from LRCLIB, with true per-word timing when it is available and estimated timing when it is not. Each word fills in as it is sung.</p>
         <p class="fine">Five singing effects (fill, pop, neon, shimmer, wave), five entrances and three layouts: scroll, focus and poster.</p>
       </div>
-      <div class="demo" id="demo" role="img" aria-label="Animated example: a lyric line filling in word by word">
+      <div class="demo" id="demo" role="img" aria-label="Animated illustration: a line of text filling in word by word">
         <div class="demo-top">
           <span class="rec" aria-hidden="true"></span>
-          <div><b>Neon Groove</b><small>The Demo Band</small></div>
+          <div><b>The word-by-word fill</b><small>Animated illustration</small></div>
         </div>
         <p class="demo-line" id="demoLine" aria-hidden="true"></p>
         <div class="demo-bar" aria-hidden="true"><i id="demoBar"></i></div>
@@ -136,19 +137,22 @@
   <div class="wrap">
     <header class="sec-head">
       <h2>One window, many looks.</h2>
+      <p class="sub">Real screenshots of Needledrop following Apple Music. The lyrics are blurred here because they belong to their writers; in the app they are sharp.</p>
     </header>
     <div class="tabs" role="tablist" aria-label="Product views">
-      <button role="tab" id="tab0" aria-controls="stage" aria-selected="true" tabindex="0" data-tab="0">Immersive</button>
-      <button role="tab" id="tab1" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="1">Poster</button>
-      <button role="tab" id="tab2" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="2">Design panel</button>
-      <button role="tab" id="tab3" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="3">Screensaver</button>
-      <button role="tab" id="tab4" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="4">Hebrew and RTL</button>
-      <button role="tab" id="tab5" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="5">Widget</button>
+      <button role="tab" id="tab0" aria-controls="stage" aria-selected="true" tabindex="0" data-tab="0">Classic</button>
+      <button role="tab" id="tab1" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="1">Colours from the cover</button>
+      <button role="tab" id="tab2" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="2">Neon preset</button>
+      <button role="tab" id="tab3" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="3">Picture disc</button>
+      <button role="tab" id="tab4" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="4">Poster</button>
+      <button role="tab" id="tab5" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="5">Design panel</button>
+      <button role="tab" id="tab6" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="6">Screensaver</button>
+      <button role="tab" id="tab7" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="7">Widget</button>
     </div>
     <div class="stage" id="stage" role="tabpanel" aria-label="Product view">
       <figure class="shot">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span id="stagebar">Needledrop</span></div>
-          <img id="stageimg" src="assets/hero.webp" width="1600" height="900" loading="lazy" decoding="async" alt="">
+          <img id="stageimg" src="assets/classic.webp" width="1600" height="900" loading="lazy" decoding="async" alt="">
         </div>
         <figcaption id="stagecap" aria-live="polite"></figcaption>
       </figure>
@@ -221,7 +225,7 @@
       <div class="panel">
         <h3>System requirements</h3>
         <dl class="spec">
-          <div><dt>Operating system</dt><dd>Windows 11 (Windows 10 also works)</dd></div>
+          <div><dt>Operating system</dt><dd>Windows 11 (Windows 10 is not tested)</dd></div>
           <div><dt>Music app</dt><dd>Apple Music from the Microsoft Store</dd></div>
           <div><dt>Download</dt><dd>About 150&nbsp;MB, no Node.js needed</dd></div>
           <div><dt>Rights</dt><dd>No administrator rights needed</dd></div>
@@ -268,7 +272,7 @@
         <h2>Download Needledrop for Windows</h2>
         <p class="sub">Free and open source. Unzip, double-click Install.cmd, then play something in Apple Music.</p>
         <div class="cta-row">
-          <a class="btn btn-light" id="dlbtn" href="https://github.com/ndvepic/needledrop/releases/latest">Download v1.0.0 (.zip)</a>
+          <a class="btn btn-light" id="dlbtn" href="https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip">Download for Windows (.zip)</a>
           <a class="btn btn-outline" href="https://github.com/ndvepic/needledrop">View source</a>
         </div>
       </div>
@@ -312,6 +316,7 @@
       </nav>
     </div>
     <p class="legal">Needledrop is an independent project. It is not affiliated with, endorsed by or sponsored by Apple Inc. “Apple Music” is a trademark of Apple Inc., used here only to say which app Needledrop works with.</p>
+    <p class="legal">Album artwork, song titles and artist names in the screenshots belong to their respective owners. They are shown only to illustrate how the app looks, and their owners do not endorse Needledrop.</p>
     <p class="legal">© 2026 Needledrop · <span>Released under the MIT License.</span></p>
   </div>
 </footer>
