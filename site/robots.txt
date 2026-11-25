@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://needledrop-music.netlify.app/sitemap.xml
