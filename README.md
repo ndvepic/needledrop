@@ -47,6 +47,8 @@ Apple Music for Windows is a closed Store app: nothing can be injected into it, 
 
 Requirements: Windows 11 (or 10), the Apple Music app from the Microsoft Store.
 
+**Download:** get `Needledrop-win-x64.zip` from the [latest release](https://github.com/ndvepic/needledrop/releases/latest).
+
 **From source** (needs [Node.js](https://nodejs.org) 20+):
 
 ```powershell
@@ -130,7 +132,10 @@ media-reader.ps1     reads the Apple Music media session
 media-control.ps1    sends play / pause / next / previous
 renderer/            UI: app.js (engine), settings.js (live design panel), style.css
 test/                unit tests            build/   icon            tools/   icon generator
+site/                the marketing website (static, bilingual)
 ```
+
+**Spotify edition:** a separate copy lives in [needledrop-spotify](https://github.com/ndvepic/needledrop-spotify). It has not yet been verified against a live Spotify session.
 
 ---
 
