@@ -10,6 +10,7 @@
   var TABS = [
     { img: 'classic', bar: 'Needledrop', alt: 'The classic layout with the album cover on a spinning record', cap: 'The classic layout: the record on the left, the lyrics lighting up word by word on the right.' },
     { img: 'cover-colours', bar: 'Needledrop: Another song', alt: 'The same layout with a different album cover and different background colours', cap: 'A different song: the background and the progress bar take their colours from the new cover.' },
+    { img: 'hebrew', bar: 'Needledrop: Hebrew and right-to-left', alt: 'A Hebrew song with the lyrics set right to left (blurred in this screenshot)', cap: 'A Hebrew song: titles and lyrics run right to left, with Hebrew fonts to choose from.' },
     { img: 'neon', bar: 'Needledrop: Neon preset', alt: 'The neon preset with a teal and magenta background', cap: 'The Neon preset: its own colours, glow and lettering, applied in one click.' },
     { img: 'picture', bar: 'Needledrop: Picture disc', alt: 'The album cover covering the whole record, placed on the right', cap: 'Picture-disc mode: the cover fills the whole record. The record can sit on either side.' },
     { img: 'poster', bar: 'Needledrop: Poster layout', alt: 'Poster layout with one huge line across the window', cap: 'Poster layout: one line at a time in huge type.' },

@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('api', {
   },
   ready() { ipcRenderer.send('renderer-ready'); },
   cmd(name, arg) { if (COMMANDS.has(name)) ipcRenderer.send('cmd', name, typeof arg === 'number' ? arg : undefined); },
-  // playback control on Apple Music: seek(seconds) / playpause / next / prev
+  // playback control on the music player: seek(seconds) / playpause / next / prev
   media(name, arg) { if (MEDIA.has(name)) ipcRenderer.send('media', name, typeof arg === 'number' ? arg : undefined); },
   // lyrics supplied by the user for the current track (size-capped; main re-validates)
   importLyrics(key, text) {

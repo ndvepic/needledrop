@@ -1,6 +1,6 @@
-# Reads the Windows media session (SMTC) that Apple Music publishes and prints one JSON line per poll.
+# Reads the Windows media session (SMTC) that a music player publishes (-Match picks the player) and prints one JSON line per poll.
 # Run with Windows PowerShell 5.1:  powershell -NoProfile -File media-reader.ps1 [-Once]
-param([switch]$Once, [switch]$Any, [int]$IntervalMs = 400)
+param([switch]$Once, [switch]$Any, [int]$IntervalMs = 400, [string]$Match = 'AppleMusic|iTunes|Apple')
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -28,8 +28,8 @@ $mgr = Await ([Windows.Media.Control.GlobalSystemMediaTransportControlsSessionMa
 
 function Get-Session {
     $all = $mgr.GetSessions()
-    foreach ($s in $all) { if ($s.SourceAppUserModelId -match 'AppleMusic|iTunes|Apple') { return $s } }
-    # By default only Apple Music is followed; -Any falls back to whatever app is playing.
+    foreach ($s in $all) { if ($s.SourceAppUserModelId -match $Match) { return $s } }
+    # Only the chosen player is followed; -Any falls back to whatever app is playing.
     if ($Any) { return $mgr.GetCurrentSession() }
     return $null
 }
@@ -92,11 +92,9 @@ while ($true) {
                 $coverTries = 0
                 $sentFp = $null
             }
-            # Apple sometimes publishes the cover a moment after the title: keep retrying
-            # (every ~2s, up to 20 times) until it shows up, then send it exactly once.
-            # Apple Music updates the title BEFORE the artwork, so the first thumbnail after a track change is often
-            # still the previous song's. Keep re-reading it (every ~2 s for ~25 s) and send it again whenever the
-            # image actually changed, instead of trusting the first one.
+            # A player can update the title BEFORE the artwork (Apple Music does), so the first thumbnail after a track
+            # change is often still the previous song's. Keep re-reading it (every ~2 s for ~25 s) and send it again
+            # whenever the image actually changed, instead of trusting the first one.
             if ($coverTries -eq 0 -or (($poll % 5) -eq 0 -and $coverTries -lt 14)) {
                 $c2 = Get-Cover $props
                 $coverTries++
@@ -122,7 +120,7 @@ while ($true) {
                 newTrack = $newTrack
                 cover    = $(if ($sendCover) { $cover } else { $null })
                 hasCover = [bool]$cover
-                # what Apple Music lets us do, so the UI can disable unsupported controls
+                # what the player lets us do, so the UI can disable unsupported controls
                 caps     = @{
                     seek  = [bool]$info.Controls.IsPlaybackPositionEnabled
                     next  = [bool]$info.Controls.IsNextEnabled

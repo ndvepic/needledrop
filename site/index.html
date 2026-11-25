@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Needledrop | Synced Lyrics for Apple Music on Windows</title>
-<meta name="description" content="Needledrop adds a spinning vinyl and word-by-word synced lyrics to Apple Music on Windows 11. Free, open source, no account and no tracking.">
+<title>Needledrop | Synced Lyrics for Apple Music and Spotify on Windows</title>
+<meta name="description" content="A spinning vinyl and word-by-word synced lyrics next to Apple Music or Spotify (beta) on Windows 11. Free, open source, no account and no tracking.">
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://needledrop-music.netlify.app/">
-<meta property="og:title" content="Needledrop | Synced Lyrics for Apple Music on Windows">
-<meta property="og:description" content="A spinning vinyl and word-by-word synced lyrics for Apple Music on Windows.">
+<meta property="og:title" content="Needledrop | Synced Lyrics for Apple Music and Spotify on Windows">
+<meta property="og:description" content="A spinning vinyl and word-by-word synced lyrics for Apple Music and Spotify (beta) on Windows.">
 <meta property="og:image" content="https://needledrop-music.netlify.app/assets/og.jpg?v=2">
 <meta property="og:url" content="https://needledrop-music.netlify.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Needledrop","applicationCategory":"MultimediaApplication","operatingSystem":"Windows 11","description":"A companion window for Apple Music on Windows with a spinning vinyl and word-by-word synced lyrics.","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Needledrop","applicationCategory":"MultimediaApplication","operatingSystem":"Windows 11","description":"A companion window for Apple Music and Spotify (beta) on Windows with a spinning vinyl and word-by-word synced lyrics.","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -46,8 +46,8 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1>Synced lyrics and a spinning vinyl for Apple Music on Windows.</h1>
-      <p class="lead">Needledrop is a companion window that follows what Apple Music is playing. The album cover becomes the record label, and every lyric line fills in word by word as it is sung.</p>
+      <h1>Synced lyrics and a spinning vinyl for Apple Music and Spotify on Windows.</h1>
+      <p class="lead">Needledrop is a companion window that follows what Apple Music or Spotify is playing. The album cover becomes the record label, and every lyric line fills in word by word as it is sung.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#download">Download for Windows</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -56,6 +56,7 @@
         <li>Free and open source (MIT)</li>
         <li>Windows 11</li>
         <li>No account required</li>
+        <li>Spotify edition in beta</li>
       </ul>
     </div>
     <figure class="shot hero-shot">
@@ -81,8 +82,8 @@
 <section class="section" id="features">
   <div class="wrap">
     <header class="sec-head">
-      <h2>What Apple Music for Windows leaves out.</h2>
-      <p class="sub">Apple Music for Windows has no visualiser and no immersive lyrics view. Needledrop adds both, as a separate window that follows the real app.</p>
+      <h2>What your music player leaves out.</h2>
+      <p class="sub">A spinning record that wears the album cover and lyrics that fill the screen, in a separate window that follows the real Apple Music or Spotify app.</p>
     </header>
 
     
@@ -126,7 +127,7 @@
       <article class="card">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 11h.01M11 11h.01M15 11h.01M7 14h10"/></svg>
         <h3>Controls and hotkeys</h3>
-        <p>Previous, play-pause and next from the window or keyboard, tray menu, launch at startup, and a global hotkey (Ctrl+Alt+L) to show or hide it from any app.</p>
+        <p>Previous, play-pause and next from the window or keyboard, tray menu, launch at startup, and a global hotkey (Ctrl+Alt+L, or Ctrl+Alt+K in the Spotify edition) to show or hide it from any app.</p>
       </article>
     </div>
   </div>
@@ -137,17 +138,18 @@
   <div class="wrap">
     <header class="sec-head">
       <h2>One window, many looks.</h2>
-      <p class="sub">Real screenshots of Needledrop following Apple Music. The lyrics are blurred here because they belong to their writers; in the app they are sharp.</p>
+      <p class="sub">Real screenshots of the Apple Music edition. The Spotify edition has the same window. The lyrics are blurred here because they belong to their writers; in the app they are sharp.</p>
     </header>
     <div class="tabs" role="tablist" aria-label="Product views">
       <button role="tab" id="tab0" aria-controls="stage" aria-selected="true" tabindex="0" data-tab="0">Classic</button>
       <button role="tab" id="tab1" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="1">Colours from the cover</button>
-      <button role="tab" id="tab2" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="2">Neon preset</button>
-      <button role="tab" id="tab3" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="3">Picture disc</button>
-      <button role="tab" id="tab4" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="4">Poster</button>
-      <button role="tab" id="tab5" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="5">Design panel</button>
-      <button role="tab" id="tab6" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="6">Screensaver</button>
-      <button role="tab" id="tab7" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="7">Widget</button>
+      <button role="tab" id="tab2" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="2">Hebrew</button>
+      <button role="tab" id="tab3" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="3">Neon preset</button>
+      <button role="tab" id="tab4" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="4">Picture disc</button>
+      <button role="tab" id="tab5" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="5">Poster</button>
+      <button role="tab" id="tab6" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="6">Design panel</button>
+      <button role="tab" id="tab7" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="7">Screensaver</button>
+      <button role="tab" id="tab8" aria-controls="stage" aria-selected="false" tabindex="-1" data-tab="8">Widget</button>
     </div>
     <div class="stage" id="stage" role="tabpanel" aria-label="Product view">
       <figure class="shot">
@@ -164,14 +166,14 @@
 <section class="section" id="how">
   <div class="wrap">
     <header class="sec-head">
-      <h2>Built next to Apple Music, not inside it.</h2>
-      <p class="sub">Apple Music for Windows is a closed Store app, so nothing can be injected into it. Needledrop reads what the app already publishes to Windows.</p>
+      <h2>Built next to your player, not inside it.</h2>
+      <p class="sub">Nothing is injected into Apple Music or Spotify. Needledrop reads what the player already publishes to Windows.</p>
     </header>
     <ol class="steps">
       <li>
         <span class="num">1</span>
-        <h3>Apple Music plays</h3>
-        <p>The app publishes title, artist, cover and position to the Windows media session, the same one that powers the system volume flyout.</p>
+        <h3>Your player plays</h3>
+        <p>Apple Music or Spotify publishes what is playing to the Windows media session, the same one that powers the system volume flyout.</p>
       </li>
       <li>
         <span class="num">2</span>
@@ -226,7 +228,7 @@
         <h3>System requirements</h3>
         <dl class="spec">
           <div><dt>Operating system</dt><dd>Windows 11 (Windows 10 is not tested)</dd></div>
-          <div><dt>Music app</dt><dd>Apple Music from the Microsoft Store</dd></div>
+          <div><dt>Music app</dt><dd>Apple Music from the Microsoft Store, or Spotify for desktop with Premium (beta)</dd></div>
           <div><dt>Download</dt><dd>About 150&nbsp;MB, no Node.js needed</dd></div>
           <div><dt>Rights</dt><dd>No administrator rights needed</dd></div>
         </dl>
@@ -234,9 +236,10 @@
       <div class="panel">
         <h3>Honest limitations</h3>
         <ul class="ticks">
-          <li>Seeking is not possible: Apple Music for Windows does not let other apps seek, so clicking a lyric line cannot jump in the song. Play, pause, next and previous work.</li>
-          <li>Lyrics come from LRCLIB, a community source, not from Apple. Rare songs may have none, and timing can be adjusted per song.</li>
-          <li>Only Apple Music is followed by default.</li>
+          <li>The Spotify edition is a beta. It has not been tested against a live Spotify session yet, so song detection, covers, lyric timing and seeking are unconfirmed.</li>
+          <li>With Apple Music, seeking is not possible: Apple Music for Windows does not let other apps seek, so clicking a lyric line cannot jump in the song. Play, pause, next and previous work.</li>
+          <li>Lyrics come from LRCLIB, a community source, not from Apple or Spotify. Rare songs may have none, and timing can be adjusted per song.</li>
+          <li>Each edition follows only its own player.</li>
           <li>Audio reactivity uses Windows output loopback, so Windows may briefly show a capture indicator.</li>
         </ul>
       </div>
@@ -259,7 +262,7 @@
       <div><kbd>P</kbd><span>Always on top</span></div>
       <div><kbd>Space</kbd><span>Play or pause</span></div>
       <div><kbd>[</kbd><kbd>]</kbd><span>Shift lyric sync</span></div>
-      <div class="wide"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>L</kbd><span>Show or hide from any app</span></div>
+      <div class="wide"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>L</kbd><span>Show or hide from any app (Spotify edition: Ctrl Alt K)</span></div>
     </div>
   </div>
 </section>
@@ -270,16 +273,18 @@
     <div class="cta-band">
       <div>
         <h2>Download Needledrop for Windows</h2>
-        <p class="sub">Free and open source. Unzip, double-click Install.cmd, then play something in Apple Music.</p>
+        <p class="sub">Free and open source. Pick the edition for your player, unzip it and double-click Install.cmd.</p>
         <div class="cta-row">
-          <a class="btn btn-light" id="dlbtn" href="https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip">Download for Windows (.zip)</a>
+          <a class="btn btn-light" id="dlbtn" href="https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip">Download for Apple Music</a>
+          <a class="btn btn-outline" href="https://github.com/ndvepic/needledrop/releases/download/spotify-beta-1/Needledrop-Spotify-win-x64.zip">Download for Spotify (beta)</a>
           <a class="btn btn-outline" href="https://github.com/ndvepic/needledrop">View source</a>
         </div>
+        <p class="sub beta-note">The Spotify edition has not yet been tested with a real Spotify account. If you try it, <a href="https://github.com/ndvepic/needledrop/issues">tell us what happened</a>.</p>
       </div>
       <ol class="install">
         <li>Unzip the download.</li>
         <li>Double-click Install.cmd. It installs for the current user, adds Start Menu and Desktop shortcuts and registers the app under Settings, then Apps.</li>
-        <li>Play a song in Apple Music. Needledrop picks it up on its own.</li>
+        <li>Play a song in Apple Music or Spotify. Needledrop is made to pick it up on its own.</li>
         <li class="note">The build is not code-signed, so Windows SmartScreen may show an “unknown publisher” notice the first time. Choose More info, then Run anyway.</li>
       </ol>
     </div>
@@ -292,10 +297,11 @@
     <header class="sec-head">
       <h2>Frequently asked questions</h2>
     </header>
-    <details><summary>Is Needledrop made by or affiliated with Apple?</summary><p>No. Needledrop is an independent project and is not affiliated with, endorsed by or sponsored by Apple Inc. “Apple Music” is a trademark of Apple Inc., used only to say which app Needledrop works with.</p></details>
-    <details><summary>Does it need an account or a subscription of its own?</summary><p>No. It is free, has no accounts and works with whatever you are already playing in Apple Music.</p></details>
+    <details><summary>Is Needledrop made by or affiliated with Apple or Spotify?</summary><p>No. Needledrop is an independent project and is not affiliated with, endorsed by or sponsored by Apple Inc. or Spotify AB. “Apple Music” is a trademark of Apple Inc. and “Spotify” is a trademark of Spotify AB, used only to say which apps Needledrop works with.</p></details>
+    <details><summary>Does it work with Spotify?</summary><p>There is a separate Spotify edition, currently in beta. It starts, runs its built-in demo and installs correctly, but it has not yet been tested against a live Spotify session. It is meant for Spotify Premium and does not handle ads.</p></details>
+    <details><summary>Does it need an account or a subscription of its own?</summary><p>No. It is free and has no accounts of its own. You keep using your Apple Music or Spotify account in the player itself.</p></details>
     <details><summary>Does it work offline?</summary><p>The app itself runs locally. Looking up lyrics needs an internet connection the first time; found lyrics are cached on your computer.</p></details>
-    <details><summary>Can I try it without Apple Music?</summary><p>Yes. Run the demo mode from source (npm run demo) for a built-in fake song, three demo tracks and word-timed lyrics.</p></details>
+    <details><summary>Can I try it without a music player?</summary><p>Yes. Run the demo mode from source (npm run demo) for a built-in fake song, three demo tracks and word-timed lyrics.</p></details>
     <details><summary>The lyrics are slightly early or late. What can I do?</summary><p>Shift the sync for that song with the [ and ] keys (hold Shift for whole seconds), or use the sync slider. You can also drop an .lrc or .txt file on the window to set a song’s lyrics.</p></details>
     <details><summary>How do I uninstall it?</summary><p>Use Settings, Apps like any other program. Your settings and lyrics cache are kept unless you delete them.</p></details>
   </div>
@@ -315,7 +321,7 @@
         <a href="https://github.com/ndvepic/needledrop">GitHub</a>
       </nav>
     </div>
-    <p class="legal">Needledrop is an independent project. It is not affiliated with, endorsed by or sponsored by Apple Inc. “Apple Music” is a trademark of Apple Inc., used here only to say which app Needledrop works with.</p>
+    <p class="legal">Needledrop is an independent project. It is not affiliated with, endorsed by or sponsored by Apple Inc. or Spotify AB. “Apple Music” is a trademark of Apple Inc. and “Spotify” is a trademark of Spotify AB, used here only to say which apps Needledrop works with.</p>
     <p class="legal">Album artwork, song titles and artist names in the screenshots belong to their respective owners. They are shown only to illustrate how the app looks, and their owners do not endorse Needledrop.</p>
     <p class="legal">© 2026 Needledrop · <span>Released under the MIT License.</span></p>
   </div>

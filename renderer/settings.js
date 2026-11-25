@@ -33,9 +33,9 @@
   const DEFAULTS = {
     // lyrics
     layout: 'scroll', fx: 'wipe', enter: 'rise', lift: true, past: 'dim',
-    // offset: Apple Music reports the playback position in whole seconds and the lyrics' timestamps come from
-    // community sources, so on real songs the display tends to trail the voice by 1-2 s. This is the starting point.
-    dimOpacity: 60, blurFar: 55, inactiveScale: 80, anchor: 40, speed: 100, offset: 1.5, pulse: true,
+    // offset: seconds added to the playback position before matching lyric timestamps. The starting value comes from
+    // the edition (Apple Music reports whole seconds, so its display trails the voice by 1-2 s without it).
+    dimOpacity: 60, blurFar: 55, inactiveScale: 80, anchor: 40, speed: 100, offset: window.EDITION.offset, pulse: true,
     // typography
     font: 'modern', size: 100, weight: 800, spacing: -1, lineHeight: 120, align: 'auto', caps: false, italic: false,
     // colours

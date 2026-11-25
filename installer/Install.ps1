@@ -1,19 +1,21 @@
-# Installs Needledrop for the current user (no administrator rights needed):
-#   * copies the app to %LOCALAPPDATA%\Programs\Needledrop
+# Installs Needledrop (Apple Music or Spotify edition, whichever is in this folder) for the current user (no administrator rights needed):
+#   * copies the app to %LOCALAPPDATA%\Programs\<app name>
 #   * adds Start Menu + Desktop shortcuts
 #   * registers it in Settings > Apps so it can be uninstalled normally
 # Run it from the unzipped folder (double-click Install.cmd).
 param(
-  [string]$InstallDir = (Join-Path $env:LOCALAPPDATA 'Programs\Needledrop'),
+  [string]$InstallDir,
   [switch]$NoShortcuts,
   [switch]$NoLaunch
 )
 $ErrorActionPreference = 'Stop'
-$name = 'Needledrop'
-$src = Join-Path $PSScriptRoot 'Needledrop-win32-x64'
-if (-not (Test-Path (Join-Path $src "$name.exe"))) {
-  throw "Could not find '$src'. Run the installer from the unzipped folder, next to the 'Needledrop-win32-x64' folder."
-}
+$appFolder = Get-ChildItem -Path $PSScriptRoot -Directory -Filter 'Needledrop*-win32-x64' | Select-Object -First 1
+if (-not $appFolder) { throw 'Run the installer from the unzipped folder, next to the Needledrop...-win32-x64 folder.' }
+$name = $appFolder.Name -replace '-win32-x64$', ''
+$player = if ($name -like '*Spotify') { 'Spotify' } else { 'Apple Music' }
+$src = $appFolder.FullName
+if (-not (Test-Path (Join-Path $src "$name.exe"))) { throw "Could not find $name.exe in '$src'." }
+if (-not $InstallDir) { $InstallDir = Join-Path $env:LOCALAPPDATA "Programs\$name" }
 
 # close a running copy first so its files can be replaced
 Get-Process -Name $name -ErrorAction SilentlyContinue | ForEach-Object {
@@ -35,14 +37,14 @@ if (-not $NoShortcuts) {
   foreach ($lnk in $targets) {
     $s = $shell.CreateShortcut($lnk)
     $s.TargetPath = $exe; $s.WorkingDirectory = $InstallDir; $s.IconLocation = "$exe,0"
-    $s.Description = 'Spinning vinyl and word-by-word lyrics for Apple Music'
+    $s.Description = "Spinning vinyl and word-by-word lyrics for $player"
     $s.Save()
   }
 }
 
 # "Apps & features" entry (per-user)
 $version = (Get-Item $exe).VersionInfo.ProductVersion
-$key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Needledrop'
+$key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$name"
 New-Item -Path $key -Force | Out-Null
 $props = @{
   DisplayName = $name; DisplayVersion = $version; Publisher = 'Nadav'; DisplayIcon = $exe
@@ -51,5 +53,5 @@ $props = @{
 }
 foreach ($k in $props.Keys) { New-ItemProperty -Path $key -Name $k -Value $props[$k] -Force | Out-Null }
 
-Write-Host "Installed. Open Apple Music, play a song, then start '$name' from the Start Menu."
+Write-Host "Installed. Open $player, play a song, then start '$name' from the Start Menu."
 if (-not $NoLaunch) { Start-Process $exe }

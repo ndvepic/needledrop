@@ -1,7 +1,8 @@
-# Long-lived helper that performs playback commands on the Apple Music media session.
+# Long-lived helper that performs playback commands on the player's media session (-Match picks the player).
 # Reads one JSON command per stdin line and answers with one JSON line on stdout:
 #   {"cmd":"seek","pos":83.5}  {"cmd":"playpause"}  {"cmd":"next"}  {"cmd":"prev"}
 # Kept separate from media-reader.ps1 so the (live-verified) reader loop is never at risk.
+param([string]$Match = 'AppleMusic|iTunes|Apple')
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Add-Type -AssemblyName System.Runtime.WindowsRuntime
@@ -19,8 +20,8 @@ function Await($op, [Type]$type) {
 [void][Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager, Windows.Media.Control, ContentType = WindowsRuntime]
 $mgr = Await ([Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager]::RequestAsync()) ([Windows.Media.Control.GlobalSystemMediaTransportControlsSessionManager])
 
-function Get-AppleSession {
-    foreach ($s in $mgr.GetSessions()) { if ($s.SourceAppUserModelId -match 'AppleMusic|iTunes|Apple') { return $s } }
+function Get-PlayerSession {
+    foreach ($s in $mgr.GetSessions()) { if ($s.SourceAppUserModelId -match $Match) { return $s } }
     return $null
 }
 
@@ -37,7 +38,7 @@ while ($true) {
     try {
         $req = $line | ConvertFrom-Json
         $cmd = [string]$req.cmd
-        $s = Get-AppleSession
+        $s = Get-PlayerSession
         if ($null -eq $s) { Reply @{ ok = $false; cmd = $cmd; error = 'no session' }; continue }
         $ok = $false
         switch ($cmd) {

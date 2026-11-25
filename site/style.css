@@ -158,6 +158,8 @@ kbd { font: 600 .9rem Consolas, 'SFMono-Regular', monospace; min-width: 2.1em; t
 .cta-band { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 64px); padding: clamp(28px, 5vw, 60px); border-radius: 22px; color: #fff; background-color: var(--navy); background-image: linear-gradient(135deg, var(--navy) 0%, #1c2150 100%); box-shadow: var(--shadow-lg); align-items: center; }
 .cta-band h2 { font-size: clamp(1.8rem, 3.2vw, 2.5rem); font-weight: 800; }
 .cta-band .sub { color: #c4c8de; }
+.cta-band .beta-note { font-size: .95rem; margin-top: 18px; }
+.cta-band .beta-note a { color: #fff; }
 .install { margin: 0; padding: 0; list-style: none; counter-reset: i; display: grid; gap: 14px; }
 .install li { counter-increment: i; position: relative; padding: 16px 18px; padding-inline-start: 62px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .12); border-radius: 12px; color: #e3e6f5; font-size: .98rem; }
 .install li::before { content: counter(i); position: absolute; inset-inline-start: 18px; top: 14px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: #fff; color: var(--navy); font: 700 .9rem var(--font-d); }

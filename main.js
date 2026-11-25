@@ -3,13 +3,16 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { parseLrc, normalizeMeta, findLyrics, buildLyrics } = require('./lib/lyrics');
+const { resolveEdition } = require('./lib/editions');
 
 const DEMO = process.argv.includes('--demo');
-// The app used to be called "Apple Music Vinyl" (data folder %APPDATA%/apple-music-vinyl). Keep using that folder when it
-// exists so existing settings, per-song sync and the lyrics cache survive the rename. New installs use %APPDATA%/needledrop.
+// Apple Music or Spotify: `--edition=spotify` in development, baked into package.json by tools/build.js when packaged.
+const EDITION = resolveEdition(process.argv, require('./package.json').edition);
+// Each edition keeps its own settings, lyrics cache and single-instance lock. The Apple edition keeps using the folder
+// from its old name when that exists, so settings survive the rename.
 if (!process.argv.some((a) => a.startsWith('--user-data-dir'))) {
-  const legacyUserData = path.join(app.getPath('appData'), 'apple-music-vinyl');
-  if (fs.existsSync(legacyUserData)) app.setPath('userData', legacyUserData);
+  const legacy = EDITION.legacyDataName && path.join(app.getPath('appData'), EDITION.legacyDataName);
+  app.setPath('userData', legacy && fs.existsSync(legacy) ? legacy : path.join(app.getPath('appData'), EDITION.dataName));
 }
 // PowerShell cannot execute a script that lives inside app.asar, so a packaged build unpacks the .ps1 files
 // (see the "pack" script) and they are found next to the archive instead.
@@ -55,8 +58,8 @@ function createWindow() {
     minHeight: 400,
     frame: false,
     backgroundColor: '#0b0b10',
-    title: 'Needledrop',
-    icon: path.join(__dirname, 'build', 'icon.png'),
+    title: EDITION.appName,
+    icon: path.join(__dirname, 'build', `${EDITION.icon}.png`),
     show: false,
     alwaysOnTop: !!s.pinned,
     webPreferences: {
@@ -70,7 +73,10 @@ function createWindow() {
   // Dropping a file on the window must never navigate the app away from its own page.
   win.webContents.on('will-navigate', (e) => e.preventDefault());
   win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
-  win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
+  // The window learns which edition it is from the page address (read by renderer/i18n.js).
+  win.loadFile(path.join(__dirname, 'renderer', 'index.html'), {
+    query: { app: EDITION.appName, player: EDITION.player, hotkey: EDITION.hotkeyLabel, offset: String(EDITION.defaultOffset) },
+  });
   win.once('ready-to-show', () => win.show());
   // Debounced: `moved` fires continuously while dragging. Widget mode has its own remembered bounds.
   let persistTimer = null;
@@ -121,7 +127,7 @@ function setWidget(on) {
 function runMedia(cmd) {
   if (DEMO) return demoMedia(cmd);
   if (!control) {
-    control = spawn(POWERSHELL, ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', CONTROL], { windowsHide: true });
+    control = spawn(POWERSHELL, ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', CONTROL, '-Match', EDITION.sessionMatch], { windowsHide: true });
     control.stdin.on('error', () => { /* helper died: next command respawns it */ });
     control.on('error', () => { control = null; });
     control.on('exit', () => { control = null; });
@@ -206,9 +212,9 @@ function toggleWindow() {
 }
 function createTray() {
   try {
-    const icon = nativeImage.createFromPath(path.join(__dirname, 'build', 'icon.png')).resize({ width: 16, height: 16 });
+    const icon = nativeImage.createFromPath(path.join(__dirname, 'build', `${EDITION.icon}.png`)).resize({ width: 16, height: 16 });
     tray = new Tray(icon);
-    tray.setToolTip('Needledrop');
+    tray.setToolTip(EDITION.appName);
     tray.on('click', toggleWindow);
     tray.on('right-click', () => tray.popUpContextMenu(Menu.buildFromTemplate([
       { label: win && win.isVisible() ? 'Hide window' : 'Show window', click: toggleWindow },
@@ -274,7 +280,7 @@ const publicTrack = () => ({
 // ───────────────────────── media reader ─────────────────────────
 function startReader() {
   if (DEMO || quitting) return;
-  reader = spawn(POWERSHELL, ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', READER], { windowsHide: true });
+  reader = spawn(POWERSHELL, ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', READER, '-Match', EDITION.sessionMatch], { windowsHide: true });
   reader.stdout.setEncoding('utf8');
   let buf = '';
   reader.stdout.on('data', (chunk) => {
@@ -308,15 +314,15 @@ let coverCache = { key: null, cover: null };
 
 function onReaderMessage(msg) {
   if (readerFails) { readerFails = 0; send('reader', { state: 'ok' }); }
-  // Apple Music keeps its media session alive with the placeholder title "Not Playing" when nothing is loaded.
-  const placeholder = msg.active && msg.title === 'Not Playing' && !msg.artist && !(msg.duration > 0);
+  // Some players keep their media session alive with a placeholder title when nothing is loaded.
+  const placeholder = msg.active && !!EDITION.idlePlaceholder && msg.title === EDITION.idlePlaceholder && !msg.artist && !(msg.duration > 0);
   if (!msg.active || placeholder) {
     if (!inactiveSince) inactiveSince = Date.now();
     if (current && Date.now() - inactiveSince > IDLE_AFTER_MS) { current = null; send('idle'); }
     return;
   }
   inactiveSince = 0;
-  const meta = normalizeMeta(msg);
+  const meta = normalizeMeta(msg, EDITION);
   if (!meta.title) return;
   const key = `${meta.title}|${meta.artist}|${meta.album}`;
   if (!current || current.key !== key) {
@@ -493,8 +499,8 @@ if (!app.requestSingleInstanceLock()) {
     });
     createWindow();
     createTray();
-    // Ctrl+Alt+L shows / hides the window from any app (silently skipped if another program owns the combination)
-    try { globalShortcut.register('Control+Alt+L', toggleWindow); } catch (e) { debugLog(`hotkey: ${e.message}`); }
+    // The edition's hotkey shows / hides the window from any app (skipped, and logged, if another program owns it)
+    try { if (!globalShortcut.register(EDITION.hotkey, toggleWindow)) debugLog(`hotkey: ${EDITION.hotkey} is taken by another program`); } catch (e) { debugLog(`hotkey: ${e.message}`); }
     if (DEMO) startDemo(); else startReader();
     // System-wide idle time (any app, not just this window) drives the screensaver mode.
     idleTimer = setInterval(() => { try { send('sys-idle', powerMonitor.getSystemIdleTime()); } catch { /* ignore */ } }, 3000);

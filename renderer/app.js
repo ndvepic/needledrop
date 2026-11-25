@@ -204,9 +204,9 @@
 
   function onIdle() {
     S.key = null; S.playing = false; body.classList.add('idle'); body.classList.remove('playing');
-    el.title.textContent = 'Apple Music'; el.artist.textContent = ''; el.album.textContent = '';
+    el.title.textContent = window.EDITION.player; el.artist.textContent = ''; el.album.textContent = '';
     el.fill.style.transform = 'scaleX(0)'; el.tcur.textContent = '0:00'; el.ttot.textContent = '0:00';
-    document.title = 'Needledrop';
+    document.title = window.EDITION.app;
     if (S.swapAnim) swapIn();
     resetLyrics(); clearCover();
     showStatus('idle');
@@ -243,12 +243,12 @@
     body.classList.toggle('seek-off', !!c && c.seek === false);   // hides the "clickable" affordances
   }
 
-  // Apple Music for Windows reports seek as unsupported (verified: it answers "ok" to a seek command but the
-  // song does not move), so seeking is only attempted when the player says it is possible. A click that
-  // cannot work explains why; keyboard / background attempts stay silent.
+  // Seeking is only attempted when the player says it is possible. Apple Music for Windows reports it as unsupported
+  // (verified: it answers "ok" to a seek command but the song does not move). A click that cannot work explains why;
+  // keyboard / background attempts stay silent.
   function seekTo(sec, explicit) {
     if (!S.key) return;
-    if (S.caps && S.caps.seek === false) { if (explicit) toast(tr('Apple Music לא מאפשרת דילוג מחוץ לאפליקציה שלה')); return; }
+    if (S.caps && S.caps.seek === false) { if (explicit) toast(tr('{player} לא מאפשרת דילוג מחוץ לאפליקציה שלה')); return; }
     sec = clamp(sec, 0, S.duration > 0 ? S.duration - 0.5 : sec);
     window.api.media('seek', sec);
     // optimistic: move the clock now so the lyrics jump immediately
@@ -259,8 +259,8 @@
   function onMediaResult(r) {
     S.lastMedia = r;
     if (!r || r.ok) return;
-    if (r.cmd === 'seek') { S.seekGuardUntil = 0; toast(tr('הדילוג נכשל — Apple Music לא אפשרה')); }
-    else if (r.error === 'no session') toast(tr('Apple Music לא מחוברת'));
+    if (r.cmd === 'seek') { S.seekGuardUntil = 0; toast(tr('הדילוג נכשל — {player} לא אפשרה')); }
+    else if (r.error === 'no session') toast(tr('{player} לא מחוברת'));
   }
 
   // ───────────── lyrics ─────────────
@@ -276,7 +276,7 @@
     const actions = (label) => `<div class="actions"><button type="button" data-act="retry">${tr(label)}</button></div>`;
     if (kind === 'loading') s.innerHTML = '<div class="dotrow"><i></i><i></i><i></i></div>';
     else if (kind === 'instrumental') s.innerHTML = '<div class="eq"><i></i><i></i><i></i><i></i><i></i></div>' + line('אינסטרומנטלי', 'Instrumental');
-    else if (kind === 'idle') s.innerHTML = line('פתח את Apple Music והפעל שיר', 'Open Apple Music and press play');
+    else if (kind === 'idle') s.innerHTML = line('פתח את {player} והפעל שיר', `Open ${window.EDITION.player} and press play`);
     else if (extra && extra.offline) s.innerHTML = line('אין חיבור לשרת המילים', 'Could not reach the lyrics service') + actions('נסה שוב');
     else s.innerHTML = line('לא נמצאו מילים לשיר הזה', 'No lyrics found') + `<div class="hint2">${tr('אפשר לגרור לכאן קובץ .lrc')}</div>` + actions('חפש שוב');
     s.querySelectorAll('div:not(.dotrow):not(.eq):not(.actions):not(.hint2)').forEach((d) => { d.dir = 'auto'; });
@@ -431,7 +431,7 @@
     }
   }
 
-  // click a lyric line: jump there in Apple Music
+  // click a lyric line: jump there in the player
   el.track.addEventListener('click', (e) => {
     if (!cfg.lineClick || S.mode !== 'synced') return;
     const line = e.target.closest && e.target.closest('.line');
@@ -733,13 +733,15 @@
   // ───────────── wiring ─────────────
   window.api.on('idle', onIdle);
   window.api.on('track', onTrack);
+  // name the window after the edition before the first track arrives
+  el.title.textContent = window.EDITION.player; document.title = window.EDITION.app;
   window.api.on('cover', onCover);
   window.api.on('lyrics', onLyrics);
   window.api.on('pos', onPos);
   window.api.on('media-result', onMediaResult);
   window.api.on('sys-idle', (s) => { S.sysIdle = s; S.sysIdleAt = performance.now(); });
   window.api.on('reader', (r) => {
-    if (r.state === 'restarting') banner(tr('מתחבר מחדש ל-Apple Music…'));
+    if (r.state === 'restarting') banner(tr('מתחבר מחדש ל-{player}…'));
     else if (r.state === 'failed') banner(tr('קורא המדיה לא עולה — בדוק ש-PowerShell זמין'), 0);
     else banner('');
   });
@@ -783,7 +785,7 @@
   try {
     if (!localStorage.getItem('amv-welcomed')) {
       localStorage.setItem('amv-welcomed', '1');
-      setTimeout(() => toast(tr('S עיצוב בלייב  ·  W וידג׳ט  ·  Ctrl+Alt+L הצגה והסתרה'), 6000), 2500);
+      setTimeout(() => toast(tr('S עיצוב בלייב  ·  W וידג׳ט  ·  {hotkey} הצגה והסתרה'), 6000), 2500);
     }
   } catch { /* ignore */ }
 })();

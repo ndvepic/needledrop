@@ -1,21 +1,23 @@
 {
   "name": "needledrop",
-  "version": "1.0.0",
-  "description": "A spinning-vinyl companion window with animated, word-by-word synced lyrics for Apple Music on Windows 11",
+  "version": "1.1.0",
+  "description": "A spinning-vinyl companion window with animated, word-by-word synced lyrics for Apple Music and Spotify on Windows 11",
   "main": "main.js",
-  "keywords": ["apple-music", "lyrics", "vinyl", "windows", "electron", "karaoke"],
+  "keywords": ["apple-music", "spotify", "lyrics", "vinyl", "windows", "electron", "karaoke"],
   "author": "Nadav",
   "license": "MIT",
   "private": true,
   "engines": { "node": ">=20" },
   "scripts": {
     "start": "electron .",
+    "start:spotify": "electron . --edition=spotify",
     "demo": "electron . --demo",
-    "test": "node --test test/lyrics.test.js",
+    "demo:spotify": "electron . --demo --edition=spotify",
+    "test": "node --test test/lyrics.test.js test/editions.test.js",
     "icon": "electron tools/make-icon.js",
-    "pack": "electron-packager . \"Needledrop\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=build/icon.ico --asar.unpack=\"*.ps1\" --app-copyright=\"MIT\" --ignore=\"^/(test|tools|docs|site|dist|installer|graphify-out|\\.impeccable)($|/)\"",
-    "zip": "powershell -NoProfile -Command \"Compress-Archive -Path 'dist/Needledrop-win32-x64','installer/*','README.md','LICENSE' -DestinationPath 'dist/Needledrop-win-x64.zip' -Force\"",
-    "dist": "npm test && npm run pack && npm run zip"
+    "dist:apple": "npm test && node tools/build.js apple",
+    "dist:spotify": "npm test && node tools/build.js spotify",
+    "dist": "npm test && node tools/build.js apple spotify"
   },
   "devDependencies": {
     "@electron/packager": "^20.3.0",

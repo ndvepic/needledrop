@@ -1,12 +1,13 @@
 # Removes Needledrop (app files, shortcuts, "Apps & features" entry, start-with-Windows entry).
-# Your settings and lyrics cache in %APPDATA%\needledrop are kept unless you pass -RemoveData.
+# Your settings and lyrics cache in %APPDATA% are kept unless you pass -RemoveData.
 param(
   [switch]$RemoveData,
   [switch]$Cleanup,          # internal: second stage, runs from a temp copy so the install folder can be deleted
   [string]$InstallDir = $PSScriptRoot
 )
 $ErrorActionPreference = 'Continue'
-$name = 'Needledrop'
+# which edition is installed in this folder
+$name = if (Test-Path (Join-Path $InstallDir 'Needledrop-Spotify.exe')) { 'Needledrop-Spotify' } else { 'Needledrop' }
 
 if (-not $Cleanup) {
   # run from a temp copy: a script cannot delete the folder it is running from
@@ -28,9 +29,9 @@ foreach ($lnk in @((Join-Path ([Environment]::GetFolderPath('Programs')) "$name.
     if ($target -like "$InstallDir*") { Remove-Item $lnk -Force }
   }
 }
-Remove-Item -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Needledrop' -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$name" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name $name -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 if (Test-Path $InstallDir) { Remove-Item -Path $InstallDir -Recurse -Force -ErrorAction SilentlyContinue }
-if ($RemoveData) { Remove-Item -Path (Join-Path $env:APPDATA 'needledrop') -Recurse -Force -ErrorAction SilentlyContinue }
+if ($RemoveData) { Remove-Item -Path (Join-Path $env:APPDATA $name.ToLower()) -Recurse -Force -ErrorAction SilentlyContinue }
 Write-Host "$name was removed."
