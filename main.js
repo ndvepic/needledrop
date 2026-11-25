@@ -11,8 +11,8 @@ const EDITION = resolveEdition(process.argv, require('./package.json').edition);
 // Each edition keeps its own settings, lyrics cache and single-instance lock. The Apple edition keeps using the folder
 // from its old name when that exists, so settings survive the rename.
 if (!process.argv.some((a) => a.startsWith('--user-data-dir'))) {
-  const legacy = EDITION.legacyDataName && path.join(app.getPath('appData'), EDITION.legacyDataName);
-  app.setPath('userData', legacy && fs.existsSync(legacy) ? legacy : path.join(app.getPath('appData'), EDITION.dataName));
+  const legacy = EDITION.legacyDataNames.map((n) => path.join(app.getPath('appData'), n)).find((p) => fs.existsSync(p));
+  app.setPath('userData', legacy || path.join(app.getPath('appData'), EDITION.dataName));
 }
 // PowerShell cannot execute a script that lives inside app.asar, so a packaged build unpacks the .ps1 files
 // (see the "pack" script) and they are found next to the archive instead.

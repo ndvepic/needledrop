@@ -3,7 +3,7 @@
   'use strict';
 
   // The file the download button points to (always the newest release). Change this if the zip is hosted elsewhere.
-  var DOWNLOAD_URL = 'https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip';
+  var DOWNLOAD_URL = 'https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-for-Apple-Music-win-x64.zip';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Product tour ---------- */

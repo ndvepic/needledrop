@@ -13,17 +13,17 @@ A companion window that turns whatever is playing into a living turntable: the r
 
 ## Two editions, one codebase
 
-| | Apple Music | Spotify |
+| | Needledrop for Apple Music | Needledrop for Spotify |
 |---|---|---|
 | **Status** | Tested against the live Apple Music app | **Beta: not yet tested against a live Spotify session** |
-| **Download** | [Needledrop-win-x64.zip](https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip) | [Needledrop-Spotify-win-x64.zip](https://github.com/ndvepic/needledrop/releases/download/spotify-beta-1/Needledrop-Spotify-win-x64.zip) |
-| **App name** | Needledrop | Needledrop-Spotify |
+| **Download** | [Needledrop-for-Apple-Music-win-x64.zip](https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-for-Apple-Music-win-x64.zip) | [Needledrop-for-Spotify-win-x64.zip](https://github.com/ndvepic/needledrop/releases/download/spotify-beta-2/Needledrop-for-Spotify-win-x64.zip) |
+| **App name** | Needledrop for Apple Music | Needledrop for Spotify |
 | **Show / hide hotkey** | `Ctrl` `Alt` `L` | `Ctrl` `Alt` `K` |
 | **Starting lyric offset** | +1.5 s (tuned on real songs) | 0 s (not calibrated) |
 
 The editions are built to run side by side: each has its own name, icon, hotkey, settings folder and installer entry. Everything they differ in is in one file, [`lib/editions.js`](lib/editions.js).
 
-The Spotify edition is built for **Spotify Premium** (there is no special handling for ads). What has been checked: it starts, shows its waiting screen, runs the built-in demo, ignores other players, and its installer works. What has **not** been checked: that it picks up a real Spotify song, cover art, lyric timing, and seeking. If you try it, please [open an issue](https://github.com/ndvepic/needledrop/issues) with what you see.
+**Needledrop for Spotify** is built for **Spotify Premium** (there is no special handling for ads). What has been checked: it starts, shows its waiting screen, runs the built-in demo, ignores other players, and its installer works. What has **not** been checked: that it picks up a real Spotify song, cover art, lyric timing, and seeking. If you try it, please [open an issue](https://github.com/ndvepic/needledrop/issues) with what you see.
 
 > Needledrop is an independent project. It is not affiliated with, endorsed by or sponsored by Apple Inc. or Spotify AB. "Apple Music" is a trademark of Apple Inc. and "Spotify" is a trademark of Spotify AB; both are used here only to say which apps Needledrop works with. Album artwork, song titles and artist names in the screenshots belong to their respective owners.
 
@@ -83,7 +83,7 @@ Download your edition from the table above, unzip, then double-click **`Install.
 | `R` | Random design |
 | `F` / `F11` | Fullscreen |
 | `W` | Widget mode |
-| `Ctrl` `Alt` `L` / `K` | Show / hide the window from any app (Apple Music / Spotify edition) |
+| `Ctrl` `Alt` `L` / `K` | Show / hide the window from any app (for Apple Music / for Spotify) |
 | `P` | Always on top |
 | `V` | Classic vinyl ↔ picture disc |
 | `Space` / `N` / `B` | Play-pause / next / previous |
@@ -116,7 +116,7 @@ Apple Music or Spotify ─► Windows media session (SMTC)
 
 ## Privacy
 
-To find lyrics the app sends the song title, artist, album and duration to `lrclib.net`, and nothing else. No accounts, no analytics, no tracking. Audio is analysed in memory and discarded. Settings and a lyrics cache live in your user profile (`%APPDATA%\needledrop` or `%APPDATA%\needledrop-spotify`).
+To find lyrics the app sends the song title, artist, album and duration to `lrclib.net`, and nothing else. No accounts, no analytics, no tracking. Audio is analysed in memory and discarded. Settings and a lyrics cache live in your user profile (`%APPDATA%\needledrop-apple-music` or `%APPDATA%\needledrop-spotify`; if you used an earlier version, its folder is kept).
 
 ## Development
 
@@ -158,10 +158,10 @@ test/  build/        unit tests, icons
 
 חלון נלווה שהופך את מה שמתנגן לפטיפון חי: העטיפה היא תווית התקליט, הזרוע עוקבת אחרי השיר, הרקע לוקח את הצבעים מהעטיפה, והמילים מתמלאות בצבע כשהן מושרות.
 
-| | Apple Music | Spotify |
+| | Needledrop for Apple Music | Needledrop for Spotify |
 |---|---|---|
 | **מצב** | נבדקה מול Apple Music אמיתית | **בטא: עוד לא נבדקה מול Spotify אמיתית** |
-| **הורדה** | [Needledrop](https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-win-x64.zip) | [Needledrop-Spotify](https://github.com/ndvepic/needledrop/releases/download/spotify-beta-1/Needledrop-Spotify-win-x64.zip) |
+| **הורדה** | [Needledrop for Apple Music](https://github.com/ndvepic/needledrop/releases/latest/download/Needledrop-for-Apple-Music-win-x64.zip) | [Needledrop for Spotify](https://github.com/ndvepic/needledrop/releases/download/spotify-beta-2/Needledrop-for-Spotify-win-x64.zip) |
 | **קיצור גלובלי** | `Ctrl+Alt+L` | `Ctrl+Alt+K` |
 
 ### מה יש בפנים

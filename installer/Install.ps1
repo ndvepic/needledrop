@@ -9,10 +9,11 @@ param(
   [switch]$NoLaunch
 )
 $ErrorActionPreference = 'Stop'
-$appFolder = Get-ChildItem -Path $PSScriptRoot -Directory -Filter 'Needledrop*-win32-x64' | Select-Object -First 1
-if (-not $appFolder) { throw 'Run the installer from the unzipped folder, next to the Needledrop...-win32-x64 folder.' }
-$name = $appFolder.Name -replace '-win32-x64$', ''
-$player = if ($name -like '*Spotify') { 'Spotify' } else { 'Apple Music' }
+$appFolder = Get-ChildItem -Path $PSScriptRoot -Directory -Filter 'Needledrop-for-*-win32-x64' | Select-Object -First 1
+if (-not $appFolder) { throw 'Run the installer from the unzipped folder, next to the Needledrop-for-...-win32-x64 folder.' }
+$name = $appFolder.Name -replace '-win32-x64$', ''     # file name, e.g. Needledrop-for-Spotify
+$title = $name -replace '-', ' '                       # what people see, e.g. Needledrop for Spotify
+$player = $title -replace '^Needledrop for ', ''
 $src = $appFolder.FullName
 if (-not (Test-Path (Join-Path $src "$name.exe"))) { throw "Could not find $name.exe in '$src'." }
 if (-not $InstallDir) { $InstallDir = Join-Path $env:LOCALAPPDATA "Programs\$name" }
@@ -31,8 +32,8 @@ $exe = Join-Path $InstallDir "$name.exe"
 if (-not $NoShortcuts) {
   $shell = New-Object -ComObject WScript.Shell
   $targets = @(
-    (Join-Path ([Environment]::GetFolderPath('Programs')) "$name.lnk"),
-    (Join-Path ([Environment]::GetFolderPath('Desktop')) "$name.lnk")
+    (Join-Path ([Environment]::GetFolderPath('Programs')) "$title.lnk"),
+    (Join-Path ([Environment]::GetFolderPath('Desktop')) "$title.lnk")
   )
   foreach ($lnk in $targets) {
     $s = $shell.CreateShortcut($lnk)
@@ -47,11 +48,17 @@ $version = (Get-Item $exe).VersionInfo.ProductVersion
 $key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$name"
 New-Item -Path $key -Force | Out-Null
 $props = @{
-  DisplayName = $name; DisplayVersion = $version; Publisher = 'Nadav'; DisplayIcon = $exe
+  DisplayName = $title; DisplayVersion = $version; Publisher = 'Nadav'; DisplayIcon = $exe
   InstallLocation = $InstallDir; NoModify = 1; NoRepair = 1
   UninstallString = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $InstallDir 'Uninstall.ps1')`""
 }
 foreach ($k in $props.Keys) { New-ItemProperty -Path $key -Name $k -Value $props[$k] -Force | Out-Null }
 
-Write-Host "Installed. Open $player, play a song, then start '$name' from the Start Menu."
+# versions published under the earlier names install separately; say so instead of removing anything
+$oldName = if ($player -eq 'Spotify') { 'Needledrop-Spotify' } else { 'Needledrop' }
+$oldLink = Join-Path ([Environment]::GetFolderPath('Programs')) "$oldName.lnk"
+if ((Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$oldName") -or (Test-Path $oldLink)) {
+  Write-Host "Note: an older version called '$oldName' is also installed. Quit it, then remove it in Settings > Apps, or run Uninstall.ps1 from its folder under $env:LOCALAPPDATA\Programs (your settings are kept)."
+}
+Write-Host "Installed. Open $player, play a song, then start '$title' from the Start Menu."
 if (-not $NoLaunch) { Start-Process $exe }

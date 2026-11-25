@@ -13,7 +13,15 @@ test('resolveEdition: default, packaged value, command-line flag wins, unknown i
 test('the two editions can run side by side: nothing that identifies an app is shared', () => {
   const { apple, spotify } = EDITIONS;
   assert.deepEqual(Object.keys(apple).sort(), Object.keys(spotify).sort());
-  for (const k of ['appName', 'dataName', 'player', 'sessionMatch', 'hotkey', 'icon']) assert.notEqual(apple[k], spotify[k], k);
+  for (const k of ['appName', 'fileName', 'dataName', 'player', 'sessionMatch', 'hotkey', 'icon']) assert.notEqual(apple[k], spotify[k], k);
+});
+
+test('both editions are named the same way, and the installer can derive every name from the file name', () => {
+  for (const e of Object.values(EDITIONS)) {
+    assert.equal(e.appName, `Needledrop for ${e.player}`);
+    assert.equal(e.fileName.replace(/-/g, ' '), e.appName);                         // installer: display name
+    assert.equal(`needledrop-${e.player.toLowerCase().replace(/ /g, '-')}`, e.dataName); // uninstaller: -RemoveData folder
+  }
 });
 
 test('session patterns do not match the other player', () => {

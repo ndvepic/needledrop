@@ -10,7 +10,8 @@ const root = path.join(__dirname, '..');
 async function build(edition, packager) {
   const [outDir] = await packager({
     dir: root,
-    name: edition.appName,
+    name: edition.fileName,
+    win32metadata: { ProductName: edition.appName, FileDescription: edition.appName },
     platform: 'win32',
     arch: 'x64',
     out: path.join(root, 'dist'),
@@ -28,7 +29,7 @@ async function build(edition, packager) {
       fs.writeFileSync(file, JSON.stringify(pkg, null, 2));
     }],
   });
-  const zip = path.join(root, 'dist', `${edition.appName}-win-x64.zip`);
+  const zip = path.join(root, 'dist', `${edition.fileName}-win-x64.zip`);
   const items = [outDir, path.join(root, 'installer', '*'), path.join(root, 'README.md'), path.join(root, 'LICENSE')]
     .map((p) => `'${p.replace(/'/g, "''")}'`).join(',');
   execFileSync('powershell.exe', ['-NoProfile', '-Command', `Compress-Archive -Path ${items} -DestinationPath '${zip}' -Force`], { stdio: 'inherit' });
